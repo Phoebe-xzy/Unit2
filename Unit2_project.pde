@@ -1,79 +1,139 @@
-// Phoebe Xie unit2 project
+// Phoebe Xie unit2 project - Cute Cat & Bunny
+int mountainX = 0;
 
 void setup (){
   size(900, 900);
   background(123, 199, 242);  // Light blue sky
 }
 
+
 void draw (){
-  cat();
+  background(123, 199, 242);  // Clear previous frame
+
+  mountainX -= 2;  // Move mountains left
+
+  // Reset position smoothly to prevent gaps
+  if (mountainX < -400) {  
+    mountainX += 400;  // Shift forward instead of hard reset
+  }
+
+  // Draw two sets of mountains to create a continuous scrolling effect
+  mountain(mountainX, 450);
+  mountain(mountainX + 400, 450); 
+  cat(200, 600);
+  bunny(700, 600);// Draw another set slightly ahead
 }
 
-void cat(){
+
+// Cute Cat
+void cat(float x, float y){
   noStroke();
 
-  // 🟡 Cat Head (Lower position)
+  //Cat Head
   fill(227, 180, 76);
-  ellipse(200, 600, 100, 100);  // Head at (200,600)
+  ellipse(x, y, 100, 100);  // Head at (x,y)
 
-  // 🔺 Shorter Cat Ears (Tilted and Connected to the Head)
+  //Shorter Cat Ears (Connected to the Head)
   fill(227, 180, 76);
-  // Left ear (shorter version)
   beginShape();
-  vertex(155, 575);   // Base of left ear (touching head)
-  vertex(165, 540);   // Left ear tip (lowered)
-  vertex(185, 570);   // Right side of ear, connecting back to the head
+  vertex(x - 45, y - 25);   // Base of left ear
+  vertex(x - 35, y - 60);   // Left ear tip (short)
+  vertex(x - 20, y - 30);   // Right side of ear
   endShape(CLOSE);
 
-  // Right ear (shorter version)
   beginShape();
-  vertex(215, 570);   // Left side of right ear, touching head
-  vertex(235, 540);   // Right ear tip (lowered)
-  vertex(245, 575);   // Right ear base, connecting to the head
+  vertex(x + 20, y - 30);   // Left side of right ear
+  vertex(x + 35, y - 60);   // Right ear tip (short)
+  vertex(x + 45, y - 25);   // Right ear base
   endShape(CLOSE);
 
-  // 🎀 Inner Ears (Pink, adjusted to fit the shorter ears)
+  //Inner Ears (Pink)
   fill(255, 180, 190);
-  // Left inner ear
   beginShape();
-  vertex(160, 573);  
-  vertex(170, 550);
-  vertex(180, 570);
+  vertex(x - 40, y - 25);  
+  vertex(x - 32, y - 45);
+  vertex(x - 22, y - 28);
   endShape(CLOSE);
 
-  // Right inner ear
   beginShape();
-  vertex(220, 570);
-  vertex(230, 550);
-  vertex(240, 573);
+  vertex(x + 22, y - 28);
+  vertex(x + 32, y - 45);
+  vertex(x + 40, y - 25);
   endShape(CLOSE);
 
-  // 👀 Cat Eyes (Vertical Black Ellipses, No Highlights)
-  fill(56, 49, 34);
-  ellipse(185, 600, 12, 20);  // Left vertical eye
-  ellipse(215, 600, 12, 20);  // Right vertical eye
+  //Cat Eyes (Vertical)
+  fill(0);
+  ellipse(x - 15, y, 12, 20);
+  ellipse(x + 15, y, 12, 20);
 
-  // 🐱 Cat Nose
-  fill(125, 103, 79);
-  triangle(195, 615, 205, 615, 200, 625);
+  //Cat Nose
+  fill(255, 100, 100);
+  triangle(x - 5, y + 15, x + 5, y + 15, x, y + 25);
 
-  // 😺 Cat Mouth (Simple Smile)
+  //Cat Mouth
   noFill();
   stroke(0);
-  arc(190, 630, 20, 10, 0, PI); // Left mouth
-  arc(210, 630, 20, 10, 0, PI); // Right mouth
+  arc(x - 10, y + 30, 20, 10, 0, PI);
+  arc(x + 10, y + 30, 20, 10, 0, PI);
 
-  // 🌸 Blush (Soft Pink Cheeks)
+  //Blush
   noStroke();
-  fill(255, 170, 170, 150);  // Light pink, slightly transparent
-  ellipse(170, 620, 15, 10);  // Left blush
-  ellipse(230, 620, 15, 10);  // Right blush
+  fill(255, 170, 170, 150);
+  ellipse(x - 30, y + 20, 15, 10);
+  ellipse(x + 30, y + 20, 15, 10);
 
-  // 🐾 Light Whiskers (Subtle & Short)
-  stroke(180, 140, 90, 180);  // Light brown, semi-transparent
+  // Light Whiskers
+  stroke(180, 140, 90, 180);
   strokeWeight(1.5);
-  // Left whisker
-  line(175, 618, 165, 616);
-  // Right whisker
-  line(225, 618, 235, 616);
+  line(x - 25, y + 18, x - 35, y + 16);
+  line(x + 25, y + 18, x + 35, y + 16);
+}
+
+
+//Cute Bunny
+void bunny(float x, float y){
+  noStroke();
+
+  // Bunny Head
+  fill(255, 230, 200);
+  ellipse(x, y, 100, 100);  // Head at (x,y)
+
+  // Bunny Ears (Longer and Oval)
+  fill(255, 230, 200);
+  ellipse(x - 25, y - 50, 25, 60);  // Left ear
+  ellipse(x + 25, y - 50, 25, 60);  // Right ear
+
+  // Inner Ears (Pink)
+  fill(255, 180, 190);
+  ellipse(x - 25, y - 50, 15, 45);  // Left inner ear
+  ellipse(x + 25, y - 50, 15, 45);  // Right inner ear
+
+  // Bunny Eyes (Vertical)
+  fill(0);
+  ellipse(x - 15, y, 12, 20);
+  ellipse(x + 15, y, 12, 20);
+
+  // Bunny Nose (Tiny Dot)
+  fill(255, 100, 100);
+  ellipse(x, y + 15, 8, 8);
+
+  // Bunny Mouth (Tiny "w" shape)
+  noFill();
+  stroke(0);
+  arc(x - 5, y + 25, 10, 10, 0, PI);
+  arc(x + 5, y + 25, 10, 10, 0, PI);
+
+  // Blush
+  noStroke();
+  fill(255, 170, 170, 150);
+  ellipse(x - 30, y + 20, 15, 10);
+  ellipse(x + 30, y + 20, 15, 10);
+}
+
+void mountain(int x, int y){
+  fill(60);  
+  triangle(x, y, x+200, y-300, x+400, y);
+  triangle(x+400, y, x+600, y-300, x+800, y);
+  triangle(x+400, y, x+600, y-300, x+800, y);
+  triangle(x+800, y, x+1000, y-300, x+1200,y);
 }
