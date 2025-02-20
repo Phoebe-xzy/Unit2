@@ -1,5 +1,7 @@
 // Phoebe Xie unit2 project - Cute Cat & Bunny
 int mountainX = 0;
+int bunnyX = 700;
+int bunnyY = 0;
 
 void setup (){
   size(900, 900);
@@ -8,8 +10,9 @@ void setup (){
 
 
 void draw (){
-  background(123, 199, 242);  // Clear previous frame
-
+  background(123, 199, 242); 
+  fill(71, 117, 58);
+  rect(0,450,900, 450);// Clear previous frame
   mountainX -= 2;  // Move mountains left
 
   // Reset position smoothly to prevent gaps
@@ -21,7 +24,15 @@ void draw (){
   mountain(mountainX, 450);
   mountain(mountainX + 400, 450); 
   cat(200, 600);
-  bunny(700, 600);// Draw another set slightly ahead
+  bunny(bunnyX, 600);// Draw another set slightly ahead
+  
+  bunnyX = bunnyX - 1;
+  if (bunnyX < 300) {
+    bunnyX -= 1;
+    bunnyX += 1;
+    bunnyX = 300;
+  }
+  
 }
 
 
