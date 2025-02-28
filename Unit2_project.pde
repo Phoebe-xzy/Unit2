@@ -2,6 +2,8 @@
 int mountainX = 0;
 int bunnyX = 700;
 int bunnyY = 0;
+float cloudX = 70;
+float starY = 0;
 
 void setup (){
   size(900, 900);
@@ -25,16 +27,26 @@ void draw (){
   mountain(mountainX + 400, 450); 
   cat(200, 600);
   bunny(bunnyX, 600);// Draw another set slightly ahead
+  stars(150, starY);
   
-  bunnyX = bunnyX - 1;
+  bunnyX = bunnyX - 2;
   if (bunnyX < 300) {
-    bunnyX -= 1;
-    bunnyX += 1;
     bunnyX = 300;
   }
-  
-}
+ 
+  cloudX = cloudX +1;
+  if (cloudX > 942.5){
+ cloudX = 100;
+ }
+ 
+ clouds(cloudX, 50);
+ 
+ starY = starY + 5;
+ if (starY > 910){
+   starY = -10;
+ }
 
+}
 
 // Cute Cat
 void cat(float x, float y){
@@ -145,6 +157,62 @@ void mountain(int x, int y){
   fill(60);  
   triangle(x, y, x+200, y-300, x+400, y);
   triangle(x+400, y, x+600, y-300, x+800, y);
-  triangle(x+400, y, x+600, y-300, x+800, y);
-  triangle(x+800, y, x+1000, y-300, x+1200,y);
+  triangle(x+800, y, x+1000, y-300, x+1200, y);
+}
+
+void clouds(float x, float y){
+  fill(225);
+  ellipse(x, y, 70, 70);
+  ellipse(x-25, y+10, 70, 70);
+  ellipse(x+25, y+10, 70, 70);
+  
+  ellipse(x+300, y+100, 80, 80);
+  ellipse(x+370, y+100, 80, 80);
+  ellipse(x+330, y+70, 80, 80);
+}
+
+// define stars
+void stars(float x, float y){
+  fill(255, 255, 150);
+  ellipse(100, y, 10, 10);
+  ellipse(100 + 180, y, 8, 8);
+  ellipse(100 + 400, y, 10, 10);
+  ellipse(100 + 500, y + 5, 10, 10);
+  ellipse(100 - 300, y - 160, 10, 10);
+  ellipse(100 + 600, y, 10, 10);
+  ellipse(100 + 700, y - 30, 10, 10);
+  
+  // Second batch of stars slightly offset in X and Y
+  ellipse(300, y - 100, 10, 10);
+  ellipse(300 + 180, y - 100, 8, 8);
+  ellipse(300 + 400, y - 100, 10, 10);
+  ellipse(300 + 500, y - 95, 10, 10);
+  ellipse(300 - 300, y - 116, 10, 10);
+  ellipse(300 + 600, y - 100, 10, 10);
+  ellipse(300 + 700, y - 130, 10, 10);
+  
+  // Third batch
+  ellipse(500, y - 200, 10, 10);
+  ellipse(500 + 180, y - 200, 8, 8);
+  ellipse(500 + 400, y - 200, 10, 10);
+  ellipse(500 + 500, y - 195, 10, 10);
+  ellipse(500 - 300, y - 216, 10, 10);
+  ellipse(500 + 600, y - 200, 10, 10);
+  ellipse(500 + 700, y - 230, 10, 10);
+  
+  ellipse(800, y - 200, 10, 10);
+  ellipse(900 + 180, y - 200, 8, 8);
+  ellipse(450 + 400, y - 200, 10, 10);
+  ellipse(203 + 500, y - 195, 10, 10);
+  ellipse(616 - 300, y - 216, 10, 10);
+  ellipse(700 + 600, y - 200, 10, 10);
+  ellipse(666 + 700, y - 230, 10, 10);
+  
+  ellipse(800, y - 200, 10, 10);
+  ellipse(900 + 180, y - 500, 8, 8);
+  ellipse(450 + 400, y - 560, 10, 10);
+  ellipse(203 + 500, y - 821, 10, 10);
+  ellipse(616 - 300, y - 616, 10, 10);
+  ellipse(700 + 600, y - 300, 10, 10);
+  ellipse(666 + 700, y - 203, 10, 10);   
 }
